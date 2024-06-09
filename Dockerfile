@@ -1,10 +1,12 @@
-FROM python:3.11-slim-buster
+FROM python:3.12-slim-bookworm
 
 WORKDIR /app
 
+RUN pip install uv && uv virtualenv venv && uv venv
+
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN uv pip install -r requirements.txt
 
 COPY . .
 
