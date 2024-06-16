@@ -1,28 +1,28 @@
-
-[tool.black]
-line-length = 120
-
-[tool.isort]
-profile = "black"
-
-
 [tool.ruff]
-select = [
-    "E",  # pycodestyle errors
-    "W",  # pycodestyle warnings
-    "F",  # pyflakes
-    "C",  # flake8-comprehensions
-    "B",  # flake8-bugbear
+lint.select = [
+    "E", # pycodestyle errors
+    "W", # pycodestyle warnings
+    "F", # pyflakes
+    "I", # isort
+    "C", # flake8-comprehensions
+    "B", # flake8-bugbear
 ]
-ignore = [
-    "E501",  # line too long, handled by black
-    "B008",  # do not perform function calls in argument defaults
-    "C901",  # too complex
+lint.ignore = [
+    "E501", # line too long, handled by black
+    "B008", # do not perform function calls in argument defaults
+    "C901", # too complex
     "E402",
     "B904",
     "B905",
-    "B009"
+    "B009",
+    "C417"
 
 ]
-[tool.ruff.per-file-ignores]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
+
+[tool.ruff.lint.pyupgrade]
+keep-runtime-typing = true

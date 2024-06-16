@@ -1,4 +1,4 @@
-import datetime
+import pendulum
 
 from scripts.db.mongo.users.collections.admins import Admins
 from scripts.db.mongo.users.collections.users import Users
@@ -36,8 +36,8 @@ class UserHandler:
             password="root",
             is_admin=True,
             is_verified=True,
-            created_at=str(datetime.datetime.now(tz=datetime.timezone.utc)),
-            updated_at=str(datetime.datetime.now(tz=datetime.timezone.utc)),
+            created_at=pendulum.now(tz="UTC").int_timestamp,
+            updated_at=pendulum.now(tz="UTC").int_timestamp,
         )
         Users().create_user(user.model_dump())
         Admins().create_admin(AdminSchema(**user.model_dump()).model_dump())

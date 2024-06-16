@@ -1,2 +1,2 @@
-fastapi[all]
-pymongo
+mongo-util==1.0.0
+tp-auth-jwt==1.0.0a
