@@ -1,14 +1,13 @@
-from scripts.constants.db_constants import CollectionConstants, DatabaseConstants
-from scripts.db.mongo import mongo_client
-from scripts.schemas import UserSchema
-from scripts.utils.mongo_util import MongoCollectionBaseClass
+from mongo_util import CollectionBaseClass, mongo_client
+
+from scripts.core.schemas.user import User
 
 
-class Users(MongoCollectionBaseClass):
+class Users(CollectionBaseClass):
     def __init__(self):
-        super().__init__(mongo_client, DatabaseConstants.users_db, CollectionConstants.users)
+        super().__init__(mongo_client=mongo_client, database="metadata", collection="users")
 
-    def create_user(self, user_data: UserSchema):
+    def create_user(self, user_data: User):
         return self.insert_one(user_data)
 
     def get_user_by_email(self, email: str):

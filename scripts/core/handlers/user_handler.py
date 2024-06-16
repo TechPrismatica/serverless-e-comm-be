@@ -1,14 +1,12 @@
 import pendulum
 
-from scripts.db.mongo.users.collections.admins import Admins
+from scripts.core.schemas.user import User
 from scripts.db.mongo.users.collections.users import Users
-from scripts.schemas import AdminSchema, UserSchema
 
 
 class UserHandler:
     def __init__(self):
         self.users = Users()
-        self.admins = Admins()
 
     def create_user(self, user_data):
         return self.users.create_user(user_data)
@@ -29,15 +27,16 @@ class UserHandler:
         return self.admins.get_root_user()
 
     def create_root_user(self):
-        user = UserSchema(
+        user = User(
+            username="root",
             email="serverless.e-comm.root@gmail.com",
             first_name="root",
             last_name="root",
             password="root",
-            is_admin=True,
             is_verified=True,
-            created_at=pendulum.now(tz="UTC").int_timestamp,
-            updated_at=pendulum.now(tz="UTC").int_timestamp,
+            meta={
+                "created_at": pendulum.now(tz="UTC").int_timestamp,
+                "updated_at": pendulum.now(tz="UTC").int_timestamp,
+            },
         )
         Users().create_user(user.model_dump())
-        Admins().create_admin(AdminSchema(**user.model_dump()).model_dump())

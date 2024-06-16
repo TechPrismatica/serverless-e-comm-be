@@ -1,2 +1,4 @@
 mongo-util==1.0.0
 tp-auth-jwt==1.0.0a
+pendulum==3.0.0
+bcrypt==4.1.3
