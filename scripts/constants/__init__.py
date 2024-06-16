@@ -1,4 +1,4 @@
 class UserRoles:
-    ADMIN = 'admin'
-    USER = 'user'
-    RETAILER = 'retailer'
+    ADMIN = "admin"
+    USER = "user"
+    RETAILER = "retailer"
