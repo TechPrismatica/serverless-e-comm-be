@@ -1,5 +1,5 @@
 import re
-from typing import List, Optional
+from typing import Optional
 
 from pydantic import Field, field_validator
 
@@ -14,7 +14,6 @@ class User(BaseSchema):
     email: str
     password: str = Field(..., min_length=8)
 
-
     @field_validator("password")
     def password_complexity(cls, value: str) -> str:
         pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
@@ -23,3 +22,8 @@ class User(BaseSchema):
                 "Password must have at least 8 characters, one uppercase, one lowercase, one number, and one special character."
             )
         return value
+
+
+class LoginUser(BaseSchema):
+    email: str
+    password: str

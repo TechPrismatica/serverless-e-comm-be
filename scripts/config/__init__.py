@@ -7,11 +7,17 @@ class _ServiceConfig(BaseSettings):
     ENABLE_CONSOLE_LOG: bool = True
     ENABLE_FILE_LOG: bool = True
     LOG_FILE_PATH: str = "logs"
+    HOST: str = "0.0.0.0"
+    PORT: int = 8000
 
 
-class _Databases(BaseSettings):
-    MONGO_URI: str
+class _RootUserConfig(BaseSettings):
+    ROOT_USER_EMAIL: str = "serverless.e-comm.root@gmail.com"
+    ROOT_USER_PASSWORD: str = "root"
+    ROOT_USERNAME: str = "root"
+    ROOT_FIRST_NAME: str = "root"
+    ROOT_LAST_NAME: str = "root"
 
 
 ServiceConfig = _ServiceConfig()
-Databases = _Databases()
+RootUserConfig = _RootUserConfig()

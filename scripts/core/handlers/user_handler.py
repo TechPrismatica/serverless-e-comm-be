@@ -1,6 +1,6 @@
 import pendulum
 
-from scripts.core.schemas.user import User
+from scripts.config import RootUserConfig
 from scripts.core.schemas.user import User as UserSchema
 from scripts.db.mongo.users.collections.users import Users
 from scripts.db.mongo.users.schemas import UserDBSchema
@@ -13,13 +13,13 @@ class UserHandler:
         self.users = Users()
 
     def create_user(self, user_data: UserSchema):
-
         if self.users.get_user_by_email(user_data.email):
-            return UserException("User already exists with this email")
+            raise UserException("User already exists with this email")
         elif self.users.get_user_by_username(user_data.username):
-            return UserException("User already exists with this username")
+            raise UserException("User already exists with this username")
         else:
             user_data.password = encrypt_password(user_data.password)
+        user_data = UserDBSchema(**user_data.model_dump())
         return self.users.create_user(user_data)
 
     def create_admin(self, admin_data):
@@ -35,19 +35,21 @@ class UserHandler:
         return self.users.get_all_users()
 
     def get_root_user(self):
-        return self.admins.get_root_user()
+        return self.users.get_user_by_username(RootUserConfig.ROOT_USERNAME)
 
     def create_root_user(self):
-        user = User(
-            username="root",
-            email="serverless.e-comm.root@gmail.com",
-            first_name="root",
-            last_name="root",
-            password="root",
+        user = UserDBSchema(
+            username=RootUserConfig.ROOT_USERNAME,
+            email=RootUserConfig.ROOT_USER_EMAIL,
+            first_name=RootUserConfig.ROOT_FIRST_NAME,
+            last_name=RootUserConfig.ROOT_LAST_NAME,
+            password=encrypt_password(RootUserConfig.ROOT_USER_PASSWORD),
             is_verified=True,
             meta={
                 "created_at": pendulum.now(tz="UTC").int_timestamp,
                 "updated_at": pendulum.now(tz="UTC").int_timestamp,
             },
+            roles=["admin"],
+            is_active=True,
         )
-        Users().create_user(user.model_dump())
+        Users().create_user(user)

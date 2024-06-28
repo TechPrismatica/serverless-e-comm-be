@@ -1,4 +1,6 @@
-from scripts.handlers.user_handler import UserHandler
+import logging
+
+from scripts.core.handlers.user_handler import UserHandler
 
 
 def root_user_check():
@@ -8,4 +10,6 @@ def root_user_check():
 
 
 def run():
+    logging.info("Running preflight checks")
     root_user_check()
+    logging.info("Preflight checks complete")

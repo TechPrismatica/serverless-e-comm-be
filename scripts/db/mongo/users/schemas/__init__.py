@@ -13,4 +13,4 @@ class UserDBSchema(BaseModel):
     is_active: bool = False
     roles: List[str] = ["customer"]
     is_verified: bool = False
-    meta: dict
+    meta: dict | None = None
