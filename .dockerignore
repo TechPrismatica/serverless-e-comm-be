@@ -1,0 +1,6 @@
+*.env
+LICENSE
+.git/
+.gitignore
+Dockerfile
+.pre-commit/
