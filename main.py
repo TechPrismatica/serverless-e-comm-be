@@ -1,8 +1,13 @@
 from dotenv import load_dotenv
+from scripts.core.services.user import user_router
+from fastapi import FastAPI
 
-from scripts.utils import preflight
+app = FastAPI()
 
-if __name__ == "__main__":
-    load_dotenv()
+app.include_router(user_router)
 
-preflight.run()
+# from scripts.utils import preflight
+
+    
+
+# preflight.run()

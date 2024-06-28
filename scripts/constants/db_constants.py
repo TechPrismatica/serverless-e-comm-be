@@ -1,8 +1,7 @@
 class DatabaseConstants:
-    users_db = "users"
+    users_db = "user_mgmt"
 
 
 class CollectionConstants:
-    admins = "admins"
     users = "users"
     roles = "roles"
