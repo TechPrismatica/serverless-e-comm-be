@@ -6,4 +6,4 @@ from scripts.config import ServiceConfig
 if __name__ == "__main__":
     load_dotenv()
 
-    uvicorn.run("main:app", host=ServiceConfig.HOST, port=ServiceConfig.PORT)
+    uvicorn.run("main:app", host=ServiceConfig.HOST, port=ServiceConfig.PORT, root_path=ServiceConfig.ROOT_API_PATH)

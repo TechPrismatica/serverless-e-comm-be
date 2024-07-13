@@ -1,7 +1,7 @@
 import re
 from typing import Optional
 
-from pydantic import Field, field_validator
+from pydantic import EmailStr, Field, field_validator
 
 from . import BaseSchema
 
@@ -11,7 +11,7 @@ class User(BaseSchema):
     middle_name: Optional[str] = None
     last_name: str
     username: str
-    email: str
+    email: EmailStr
     password: str = Field(..., min_length=8)
 
     @field_validator("password")
