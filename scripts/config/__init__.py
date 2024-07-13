@@ -9,6 +9,7 @@ class _ServiceConfig(BaseSettings):
     LOG_FILE_PATH: str = "logs"
     HOST: str = "0.0.0.0"
     PORT: int = 8000
+    ROOT_API_PATH: str = "/auth"
 
 
 class _RootUserConfig(BaseSettings):
